@@ -5,28 +5,9 @@ import cn from 'classnames';
 
 import { authService } from '../services/authService.js';
 import { usePageError } from '../hooks/usePageError.js';
-
-function validateEmail(value) {
-  if (!value) {
-    return 'Email is required';
-  }
-
-  const emailPattern = /^[\w.+-]+@([\w-]+\.){1,3}[\w-]{2,}$/;
-
-  if (!emailPattern.test(value)) {
-    return 'Email is not valid';
-  }
-}
-
-const validatePassword = (value) => {
-  if (!value) {
-    return 'Password is required';
-  }
-
-  if (value.length < 6) {
-    return 'At least 6 characters';
-  }
-};
+import {validateUsername} from "../utils/validateUsername";
+import {validatePassword} from "../utils/validatePassword";
+import {validateEmail} from "../utils/validateEmail";
 
 export const RegistrationPage = () => {
   const [error, setError] = usePageError('');
@@ -49,7 +30,7 @@ export const RegistrationPage = () => {
           password: '',
         }}
         validateOnMount={true}
-        onSubmit={({ email, password }, formikHelpers) => {
+        onSubmit={({ name, email, password }, formikHelpers) => {
           formikHelpers.setSubmitting(true);
 
           authService.register({ email, password })
@@ -83,6 +64,37 @@ export const RegistrationPage = () => {
         {({ touched, errors, isSubmitting }) => (
           <Form className="box">
             <h1 className="title">Sign up</h1>
+
+            <div className="field">
+              <label htmlFor="name" className="label">Name</label>
+
+              <div className="control has-icons-left has-icons-right">
+                <Field
+                  validate={validateUsername}
+                  name="name"
+                  type="text"
+                  id="name"
+                  placeholder="Your name"
+                  className={cn('input', {
+                    'is-danger': touched.name && errors.name,
+                  })}
+                />
+
+                <span className="icon is-small is-left">
+                  <i className="fa fa-user"></i>
+                </span>
+
+                {touched.name && errors.name && (
+                  <span className="icon is-small is-right has-text-danger">
+                    <i className="fas fa-exclamation-triangle"></i>
+                  </span>
+                )}
+              </div>
+
+              {touched.name && errors.name && (
+                <p className="help is-danger">{errors.name}</p>
+              )}
+            </div>
 
             <div className="field">
               <label htmlFor="email" className="label">Email</label>
