@@ -7,7 +7,6 @@ import { AuthContext } from '../components/AuthContext.jsx';
 import { usePageError } from '../hooks/usePageError.js';
 import {validateEmail} from "../utils/validateEmail";
 import {validatePassword} from "../utils/validatePassword";
-import {validateUsername} from "../utils/validateUsername";
 
 export const LoginPage = () => {
   const navigate = useNavigate();
@@ -37,37 +36,6 @@ export const LoginPage = () => {
         {({ touched, errors, isSubmitting }) => (
           <Form className="box">
             <h1 className="title">Log in</h1>
-
-            <div className="field">
-              <label htmlFor="name" className="label">Name</label>
-
-              <div className="control has-icons-left has-icons-right">
-                <Field
-                  validate={validateUsername}
-                  name="name"
-                  type="text"
-                  id="name"
-                  placeholder="Your name"
-                  className={cn('input', {
-                    'is-danger': touched.name && errors.name,
-                  })}
-                />
-
-                <span className="icon is-small is-left">
-                  <i className="fa fa-user"></i>
-                </span>
-
-                {touched.name && errors.name && (
-                  <span className="icon is-small is-right has-text-danger">
-                    <i className="fas fa-exclamation-triangle"></i>
-                  </span>
-                )}
-              </div>
-
-              {touched.name && errors.name && (
-                <p className="help is-danger">{errors.name}</p>
-              )}
-            </div>
 
             <div className="field">
               <label htmlFor="email" className="label">Email</label>

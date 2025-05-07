@@ -26,6 +26,7 @@ export const RegistrationPage = () => {
     <>
       <Formik
         initialValues={{
+          name: '',
           email: '',
           password: '',
         }}
@@ -33,7 +34,7 @@ export const RegistrationPage = () => {
         onSubmit={({ name, email, password }, formikHelpers) => {
           formikHelpers.setSubmitting(true);
 
-          authService.register({ email, password })
+          authService.register({ name, email, password })
             .then(() => {
               setRegistered(true);
             })
@@ -48,6 +49,7 @@ export const RegistrationPage = () => {
 
               const { errors, message } = error.response.data;
 
+              formikHelpers.setFieldError('name', errors?.name);
               formikHelpers.setFieldError('email', errors?.email);
               formikHelpers.setFieldError('password', errors?.password);
 
@@ -168,7 +170,7 @@ export const RegistrationPage = () => {
                 className={cn('button is-success has-text-weight-bold', {
                   'is-loading': isSubmitting,
                 })}
-                disabled={isSubmitting || errors.email || errors.password}
+                disabled={isSubmitting || errors.name || errors.email || errors.password}
               >
                 Sign up
               </button>
