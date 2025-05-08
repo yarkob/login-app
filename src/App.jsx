@@ -13,6 +13,7 @@ import { UsersPage } from './pages/UsersPage';
 import { Loader } from './components/Loader.jsx';
 import { HomePage } from './pages/HomePage.jsx';
 import { usePageError } from './hooks/usePageError.js';
+import {ProfilePage} from "./pages/ProfilePage";
 
 function App() {
   const navigate = useNavigate();
@@ -36,6 +37,10 @@ function App() {
 
         <NavLink to="/users" className="navbar-item">
           Users
+        </NavLink>
+
+        <NavLink to="/profile" className="navbar-item">
+          Profile
         </NavLink>
       </div>
 
@@ -92,6 +97,7 @@ function App() {
             path="login"
             element={<LoginPage />}
           />
+          <Route path="profile" element={<ProfilePage user={user} />} />
 
           {/*<Route path="/" element={<RequireAuth />}>*/}
             <Route
