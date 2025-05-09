@@ -97,7 +97,8 @@ function App() {
             path="login"
             element={<LoginPage />}
           />
-          <Route path="profile" element={<ProfilePage user={user} />} />
+          <Route path="profile" element={user ? <ProfilePage user={user}/> :
+            <h1>You have to be logged in to view your profile</h1>}/>
 
           {/*<Route path="/" element={<RequireAuth />}>*/}
             <Route
