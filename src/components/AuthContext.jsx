@@ -22,14 +22,14 @@ export const AuthProvider = ({ children }) => {
       accessTokenService.save(accessToken);
       setUser(user);
     } catch (error) {
-      console.log('User is not authentincated');
+      console.log('User is not authenticated');
     } finally {
       setChecked(true);
     }
   }
 
-  async function login({ email, password }) {
-    const { accessToken, user } = await authService.login({ email, password });
+  async function login({ name, email, password }) {
+    const { accessToken, user } = await authService.login({ name, email, password });
 
     accessTokenService.save(accessToken);
     setUser(user);

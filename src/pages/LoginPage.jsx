@@ -5,28 +5,8 @@ import cn from 'classnames';
 
 import { AuthContext } from '../components/AuthContext.jsx';
 import { usePageError } from '../hooks/usePageError.js';
-
-function validateEmail(value) {
-  if (!value) {
-    return 'Email is required';
-  }
-
-  const emailPattern = /^[\w.+-]+@([\w-]+\.){1,3}[\w-]{2,}$/;
-
-  if (!emailPattern.test(value)) {
-    return 'Email is not valid';
-  }
-}
-
-function validatePassword(value) {
-  if (!value) {
-    return 'Password is required';
-  }
-    
-  if (value.length < 6) {
-    return 'At least 6 characters';
-  }
-};
+import {validateEmail} from "../utils/validateEmail";
+import {validatePassword} from "../utils/validatePassword";
 
 export const LoginPage = () => {
   const navigate = useNavigate();
@@ -46,7 +26,7 @@ export const LoginPage = () => {
         onSubmit={({ email, password }) => {
           return login({ email, password })
             .then(() => {
-              navigate(location.state?.from?.pathname || '/');
+              navigate(location.state?.from?.pathname || '/profile');
             })
             .catch(error => {
               setError(error.response?.data?.message);
@@ -121,6 +101,7 @@ export const LoginPage = () => {
               ) : (
                 <p className="help">At least 6 characters</p>
               )}
+              <Link to="/request-change-password">Forgot password?</Link>
             </div>
 
             <div className="field">

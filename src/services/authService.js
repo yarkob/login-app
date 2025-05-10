@@ -1,11 +1,11 @@
 import { authClient } from '../http/authClient.js';
 
-function register({ email, password }) {
-  return authClient.post('/registration', { email, password })
+function register({ name, email, password }) {
+  return authClient.post('/registration', { name, email, password })
 }
 
-function login({ email, password }) {
-  return authClient.post('/login', { email, password })
+function login({ name, email, password }) {
+  return authClient.post('/login', { name, email, password })
 }
 
 function logout() {
@@ -20,4 +20,12 @@ function refresh() {
   return authClient.get('/refresh');
 }
 
-export const authService = { register, login, logout, activate, refresh };
+function requestChangePassword(email) {
+  return authClient.post(`/requestChangePassword`, { email });
+}
+
+function changePassword(user) {
+  return authClient.post(`/changePassword`, { password: user.password, confirmPassword: user.confirmPassword, email: user.email });
+}
+
+export const authService = { register, login, logout, activate, refresh, requestChangePassword, changePassword };

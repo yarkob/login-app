@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  background-color: lightgrey;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  margin-bottom: 64px;
+}
+
+.input {
+  width: 256px;
+}
+
+.title {
+  font-size: 64px;
+  margin-bottom: 32px;
+}
+
+.email {
+  margin-bottom: 32px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 32px;
+}
