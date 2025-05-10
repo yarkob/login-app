@@ -1,11 +1,15 @@
 import {profileClient} from "../http/profileClient";
 
-export const changeName = (user) => {
+const changeName = (user) => {
   return profileClient.post('/profile/name', {name: user.name, email: user.email});
 }
 
-export const changeEmail = (user) => {
+const changeEmail = (user) => {
   return profileClient.post('/profile/email', {newEmail: user.newEmail, oldEmail: user.oldEmail, password: user.password});
 }
 
-export const profileService = { changeName, changeEmail };
+const changePassword = (user) => {
+  return profileClient.post('/profile/password', { newPassword: user.newPassword, oldPassword: user.oldPassword, confirmation: user.confirmation, email: user.email });
+}
+
+export const profileService = { changeName, changeEmail, changePassword };
