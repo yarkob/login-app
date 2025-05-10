@@ -1,8 +1,6 @@
 import s from './ProfilePage.module.scss';
 import React, {useEffect, useRef, useState} from "react";
 import {profileService} from "../services/profileService";
-import {validateEmail} from "../utils/validateEmail";
-import {validatePassword} from "../utils/validatePassword";
 
 export const ProfilePage = ({ user }) => {
   const [isNameInput, setIsNameInput] = useState(false);
@@ -56,7 +54,6 @@ export const ProfilePage = ({ user }) => {
     setPassword(event.target.password.value);
     setNewEmail(event.target.newEmail.value);
     setIsEmailInput(false);
-    console.log({ oldEmail: user.email, newEmail, password });
     profileService.changeEmail({ oldEmail: user.email, newEmail, password }).catch((error) => {
       setError(error.response?.data?.message);
     })
@@ -123,8 +120,7 @@ export const ProfilePage = ({ user }) => {
         {isEmailInput ?
           <form onSubmit={emailSubmitHandler} className={s.form}>
             <input className={s.input} name="newEmail" onChange={emailChangeHandler} ref={emailRef} value={newEmail}/>
-            <input className={s.input} name="password" onChange={passwordChangeHandler} value={password}
-                   type="password"/>
+            <input className={s.input} name="password" onChange={passwordChangeHandler} value={password} type="password"/>
             <button type='submit'>Submit</button>
           </form> : <p className={s.email}>{newEmail}</p>}
       </div>

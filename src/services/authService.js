@@ -20,4 +20,12 @@ function refresh() {
   return authClient.get('/refresh');
 }
 
-export const authService = { register, login, logout, activate, refresh };
+function requestChangePassword(email) {
+  return authClient.post(`/requestChangePassword`, { email });
+}
+
+function changePassword(user) {
+  return authClient.post(`/changePassword`, { password: user.password, confirmPassword: user.confirmPassword, email: user.email });
+}
+
+export const authService = { register, login, logout, activate, refresh, requestChangePassword, changePassword };

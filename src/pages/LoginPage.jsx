@@ -101,6 +101,7 @@ export const LoginPage = () => {
               ) : (
                 <p className="help">At least 6 characters</p>
               )}
+              <Link to="/request-change-password">Forgot password?</Link>
             </div>
 
             <div className="field">

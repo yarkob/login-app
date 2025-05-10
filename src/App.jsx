@@ -14,6 +14,8 @@ import { Loader } from './components/Loader.jsx';
 import { HomePage } from './pages/HomePage.jsx';
 import { usePageError } from './hooks/usePageError.js';
 import {ProfilePage} from "./pages/ProfilePage";
+import {RequestChangePasswordPage} from "./pages/RequestChangePasswordPage";
+import {ChangePasswordPage} from "./pages/ChangePasswordPage";
 
 function App() {
   const navigate = useNavigate();
@@ -99,6 +101,8 @@ function App() {
           />
           <Route path="profile" element={user ? <ProfilePage user={user}/> :
             <h1>You have to be logged in to view your profile</h1>}/>
+          <Route path="request-change-password" element={<RequestChangePasswordPage/>} />
+          <Route path="change-password" element={<ChangePasswordPage />}/>
 
           {/*<Route path="/" element={<RequireAuth />}>*/}
             <Route
